@@ -1,0 +1,30 @@
+type ListMetadata {
+  count: Int
+}
+
+type Mutation {
+  createTodo(id: ID!, title: String!, completed: Boolean!): Todo
+  updateTodo(id: ID!, title: String, completed: Boolean): Todo
+  removeTodo(id: ID!): Boolean
+}
+
+type Query {
+  Todo(id: ID!): Todo
+  allTodos(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: TodoFilter): [Todo]
+  _allTodosMeta(page: Int, perPage: Int, filter: TodoFilter): ListMetadata
+}
+
+type Todo {
+  id: ID!
+  title: String!
+  completed: Boolean!
+}
+
+input TodoFilter {
+  q: String
+  ids: [ID]
+  id: ID
+  title: String
+  completed: Boolean
+}
+
